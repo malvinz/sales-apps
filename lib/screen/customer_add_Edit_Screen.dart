@@ -95,54 +95,58 @@ class _CustomerAddEditScreen extends State<CustomerAddEditScreen> {
   }
 
   Future<void> _selectOnMap() async {
-    var latlang = _kordinat.text.split(',');
-    final initialLocation = const PlaceLocation(latitude: -6.235918, longitude: 106.782708);
-    final selectedLocation = await Navigator.of(context).push(
-      MaterialPageRoute(
-        fullscreenDialog: true,
-        builder: (ctx) => MapScreen(
-          isSelecting: latlang[0] == "" ? false : true,
-          isEnable: true,
-          initialLocation: latlang[0] == ""
-              ? initialLocation
-              : PlaceLocation(
-                  latitude: double.parse(latlang[0]), longitude: double.parse(latlang[1])),
+    try {
+      var latlang = _kordinat.text.split(',');
+      final initialLocation = const PlaceLocation(latitude: -6.235918, longitude: 106.782708);
+      final selectedLocation = await Navigator.of(context).push(
+        MaterialPageRoute(
+          fullscreenDialog: true,
+          builder: (ctx) => MapScreen(
+            isSelecting: latlang[0] == "" ? false : true,
+            isEnable: true,
+            initialLocation: latlang[0] == ""
+                ? initialLocation
+                : PlaceLocation(
+                    latitude: double.parse(latlang[0]), longitude: double.parse(latlang[1])),
+          ),
         ),
-      ),
-    );
+      );
 
-    if (selectedLocation == null) {
-      return;
+      if (selectedLocation == null) {
+        return;
+      }
+      setState(
+        () {
+          _titikPengiriman.text = selectedLocation[1].toString();
+          _kordinat.text =
+              "${selectedLocation[0].latitude.toString()},${selectedLocation[0].longitude.toString()}";
+
+          _editedCustomer = Customer(
+            custID: _editedCustomer.custID,
+            custName: _editedCustomer.custName,
+            kategoriCust: _editedCustomer.kategoriCust,
+            subKategori: _editedCustomer.subKategori,
+            jenis: _editedCustomer.jenis,
+            namaOutlet: _editedCustomer.namaOutlet,
+            aktif: 1,
+            alamat: _editedCustomer.alamat,
+            noTelp: _editedCustomer.noTelp,
+            sales: _editedCustomer.sales,
+            tglLahirPemilik: _editedCustomer.tglLahirPemilik,
+            alamatPengiriman: _editedCustomer.alamatPengiriman,
+            titikPengiriman: _titikPengiriman.text,
+            kodeProvinsi: _editedCustomer.kodeProvinsi,
+            namaProvinsi: _editedCustomer.namaProvinsi,
+            kodeKota: _editedCustomer.kodeKota,
+            namaKota: _editedCustomer.namaKota,
+          );
+        },
+      );
+
+      _showPreview(selectedLocation[0].latitude, selectedLocation[0].longitude);
+    } on PlatformException {
+      print('Failed to google api key, check read me file again');
     }
-    setState(
-      () {
-        _titikPengiriman.text = selectedLocation[1].toString();
-        _kordinat.text =
-            "${selectedLocation[0].latitude.toString()},${selectedLocation[0].longitude.toString()}";
-
-        _editedCustomer = Customer(
-          custID: _editedCustomer.custID,
-          custName: _editedCustomer.custName,
-          kategoriCust: _editedCustomer.kategoriCust,
-          subKategori: _editedCustomer.subKategori,
-          jenis: _editedCustomer.jenis,
-          namaOutlet: _editedCustomer.namaOutlet,
-          aktif: 1,
-          alamat: _editedCustomer.alamat,
-          noTelp: _editedCustomer.noTelp,
-          sales: _editedCustomer.sales,
-          tglLahirPemilik: _editedCustomer.tglLahirPemilik,
-          alamatPengiriman: _editedCustomer.alamatPengiriman,
-          titikPengiriman: _titikPengiriman.text,
-          kodeProvinsi: _editedCustomer.kodeProvinsi,
-          namaProvinsi: _editedCustomer.namaProvinsi,
-          kodeKota: _editedCustomer.kodeKota,
-          namaKota: _editedCustomer.namaKota,
-        );
-      },
-    );
-
-    _showPreview(selectedLocation[0].latitude, selectedLocation[0].longitude);
   }
 
 //============================== END OF MAP ==========================
