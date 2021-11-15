@@ -1,4 +1,4 @@
-# satara_sales
+# sales_apps
 
 A new Flutter project.
 
