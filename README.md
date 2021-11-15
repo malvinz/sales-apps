@@ -1,16 +1,21 @@
 # sales_apps
+Program Mobile Sales simple dengan fitur Map, dan kamera.
+tanpa menggunakan database.
 
-A new Flutter project.
+<img src = "Login-page.png" alt =" login page">
+untuk login dapat menggunakan ID : Malvin pass : malvin
+
+
+
+<img src = "main-menu.jpg" alt =" Main Menu page">
+<img src = "app drawer.jpg" alt =" app drawer page">
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+program ini "TIDAK" menggunakan "DATABASE" dan hanya berfokus menggunakan list object sebagaip penyimpan datasementara.
+tapi MODEL data dan provider sudah tersedia dalam bentuk yang dapat di covert dari json to list.
+untuk penggunaaan nya cukup sediakan database dan link dengan REST API.
+dan sesuaikan dengan nama kolom.
+maka sudah dapat digunakan.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+untuk penggunaan maps : cukup masukkan "GOOGLE API KEY" dengan cara search kata "google_api_key" dan "google_map_api" dan ganti dengan google api key yang ada.
